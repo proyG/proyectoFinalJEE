@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TransaccionCreateDlg" widgetVar="TransaccionCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateTransaccionTitle}">
+            <h:form id="TransaccionCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{transaccionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTransaccionLabel_tipo}" for="tipo" />
+                        <p:inputText id="tipo" value="#{transaccionController.selected.tipo}" title="#{bundle.CreateTransaccionTitle_tipo}" />
+                        <p:outputLabel value="#{bundle.CreateTransaccionLabel_idTransaccion}" for="idTransaccion" />
+                        <p:inputText id="idTransaccion" value="#{transaccionController.selected.idTransaccion}" title="#{bundle.CreateTransaccionTitle_idTransaccion}" required="true" requiredMessage="#{bundle.CreateTransaccionRequiredMessage_idTransaccion}"/>
+                        <p:outputLabel value="#{bundle.CreateTransaccionLabel_cliente}" for="cliente" />
+                        <p:selectOneMenu id="cliente" value="#{transaccionController.selected.cliente}" >
+                            <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"
+                                           var="clienteItem"
+                                           itemValue="#{clienteItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateTransaccionLabel_inmueble}" for="inmueble" />
+                        <p:selectOneMenu id="inmueble" value="#{transaccionController.selected.inmueble}" >
+                            <f:selectItems value="#{inmuebleController.itemsAvailableSelectOne}"
+                                           var="inmuebleItem"
+                                           itemValue="#{inmuebleItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{transaccionController.create}" value="#{bundle.Save}" update="display,:TransaccionListForm:datalist,:growl" oncomplete="handleSubmit(args,'TransaccionCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TransaccionCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

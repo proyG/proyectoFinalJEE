@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Registro</title>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <p:growl id="msgRegistrar" life="9000" />
+
+
+                <p:confirmDialog message="Ingrese sus Datos para registrarlos en la Base de Datos!" header="Formulario de Registro" widgetVar="dlg" visible="true" closable="false" showEffect="fade" hideEffect="explode"  >
+                    <!--<div style="margin-left: 400px; margin-right: 450px">-->
+                    <p:panel id="panel" header="Datos" closable="false">                
+                        <h:panelGrid columns="3" cellpadding="5">
+                            <p:outputLabel for="txtUsuario" value="Nombre de usuario" />
+                            <p:inputText id="txtUsuario" value="#{usuarioController.usuario}" required="true" label="Nombre Usuario" validatorMessage="Campo usuario: no se permiten caracetes especiales, Ademas su longitud debe ser mayor a 4">
+                                <f:validateLength minimum="4" />  
+                                <f:validateRegex pattern="^[a-zA-Z[0-9]]+$" />
+                            </p:inputText>
+                            <!--<p:message for="txtUsuario" />-->
+
+                            <h:outputText value="Constraseña: " />
+                            <p:password weakLabel="debil" promptLabel="Ingrese su constraseña" goodLabel="buena" strongLabel="Fuerte" 
+                                        id="contraseña" value="#{usuarioController.contrasenia}" match="contraseña2" feedback="true" 
+                                        validatorMessage="Contraseñas NO coinciden" required="true"  label="Contraseña">
+                                <f:validateLength minimum="16" />
+                                <!--<f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})" />-->
+                            </p:password>
+                            <!--<p:message for="contraseña" />-->
+
+                            <h:outputText value="Confirme Constraseña: " />
+                            <p:password weakLabel="debil" promptLabel="Ingrese su constraseña" goodLabel="buena" strongLabel="Fuerte" 
+                                        id="contraseña2" value="#{usuarioController.contrasenia}" feedback="true" required="true"
+                                        label="Confirmar contraseña" >
+                                <f:validateLength minimum="16" />   
+                                <!--<f:validateRegex pattern="((?=.*\d)[(?=.*[a-z])][(?=.*[A-Z])][(?=.*[@#$%])].{6,20})" />-->
+                            </p:password>
+                            <!--<p:message for="contraseña2" />   -->
+
+                        </h:panelGrid>
+                    </p:panel>
+
+                    <p:toolbar>
+                        <f:facet name="left">
+                            <p:commandButton value="Registrar" update="msgRegistrar" actionListener="#{usuarioController.RegistrarUsuario}" style="margin-right:20px;" />
+                            <p:link outcome="index" value="Cancelar"></p:link>
+                        </f:facet> 
+                        <f:facet name="right">                                        
+                            <p:link outcome="index" value="Iniciar Sesión"></p:link>
+                        </f:facet> 
+                    </p:toolbar>
+                    <p:panel>
+                        <div style="background:#f2f2f2; border:5px solid #fefefe; outline:thin solid #efefef; margin-left: 400; margin-right: 400; ">
+                            <h2 align="center">requisitos para establecer la constraseña:</h2>
+                            <p>- debe contener 16 caracteres como mínimo</p>
+                            <p>- debe contener mayusculas, minusculas, numeros y caracteres especiales</p>                            
+                        </div>        
+                    </p:panel>
+                    
+                </p:confirmDialog>    
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="InmuebleEditDlg" widgetVar="InmuebleEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditInmuebleTitle}">
+            <h:form id="InmuebleEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{inmuebleController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditInmuebleLabel_barrio}" for="barrio" />
+                        <p:inputText id="barrio" value="#{inmuebleController.selected.barrio}" title="#{bundle.EditInmuebleTitle_barrio}" />
+                        <p:outputLabel value="#{bundle.EditInmuebleLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{inmuebleController.selected.direccion}" title="#{bundle.EditInmuebleTitle_direccion}" required="true" requiredMessage="#{bundle.EditInmuebleRequiredMessage_direccion}"/>
+                        <p:outputLabel value="#{bundle.EditInmuebleLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{inmuebleController.selected.telefono}" title="#{bundle.EditInmuebleTitle_telefono}" />
+                        <p:outputLabel value="#{bundle.EditInmuebleLabel_tipo}" for="tipo" />
+                        <p:inputText id="tipo" value="#{inmuebleController.selected.tipo}" title="#{bundle.EditInmuebleTitle_tipo}" />
+                        <p:outputLabel value="#{bundle.EditInmuebleLabel_tamaÃo}" for="tamaÃo" />
+                        <p:inputText id="tamaÃo" value="#{inmuebleController.selected.tamaÃo}" title="#{bundle.EditInmuebleTitle_tamaÃo}" />
+                        <p:outputLabel value="#{bundle.EditInmuebleLabel_precio}" for="precio" />
+                        <p:inputText id="precio" value="#{inmuebleController.selected.precio}" title="#{bundle.EditInmuebleTitle_precio}" />
+                        <p:outputLabel value="#{bundle.EditInmuebleLabel_img}" for="img" />
+                        <p:inputText id="img" value="#{inmuebleController.selected.img}" title="#{bundle.EditInmuebleTitle_img}" />
+                        <p:outputLabel value="#{bundle.EditInmuebleLabel_idInmueble}" for="idInmueble" />
+                        <p:inputText id="idInmueble" value="#{inmuebleController.selected.idInmueble}" title="#{bundle.EditInmuebleTitle_idInmueble}" required="true" requiredMessage="#{bundle.EditInmuebleRequiredMessage_idInmueble}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{inmuebleController.update}" value="#{bundle.Save}" update="display,:InmuebleListForm:datalist,:growl" oncomplete="handleSubmit(args, 'InmuebleEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="InmuebleEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
