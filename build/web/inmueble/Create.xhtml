@@ -24,10 +24,12 @@
                         <p:inputText id="tamaÃo" value="#{inmuebleController.selected.tamaÃo}" title="#{bundle.CreateInmuebleTitle_tamaÃo}" />
                         <p:outputLabel value="#{bundle.CreateInmuebleLabel_precio}" for="precio" />
                         <p:inputText id="precio" value="#{inmuebleController.selected.precio}" title="#{bundle.CreateInmuebleTitle_precio}" />
+                        
                         <p:outputLabel value="#{bundle.CreateInmuebleLabel_img}" for="img" />
                         <p:inputText id="img" value="#{inmuebleController.selected.img}" title="#{bundle.CreateInmuebleTitle_img}" />
-                        <p:outputLabel value="#{bundle.CreateInmuebleLabel_idInmueble}" for="idInmueble" />
-                        <p:inputText id="idInmueble" value="#{inmuebleController.selected.idInmueble}" title="#{bundle.CreateInmuebleTitle_idInmueble}" required="true" requiredMessage="#{bundle.CreateInmuebleRequiredMessage_idInmueble}"/>
+                        
+                        
+                        
                     </p:panelGrid>
                     <p:commandButton actionListener="#{inmuebleController.create}" value="#{bundle.Save}" update="display,:InmuebleListForm:datalist,:growl" oncomplete="handleSubmit(args,'InmuebleCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="InmuebleCreateDialog.hide()"/>

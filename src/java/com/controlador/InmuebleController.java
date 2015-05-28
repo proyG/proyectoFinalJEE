@@ -11,17 +11,32 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.servlet.ServletContext;
+
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import javax.servlet.http.HttpSession;
+import org.primefaces.model.UploadedFile;
 
 @ManagedBean(name = "inmuebleController")
 @SessionScoped
+
 public class InmuebleController implements Serializable {
 
+    private UploadedFile foto;
+    
     @EJB
     private com.controlador.InmuebleFacade ejbFacade;
     private List<Inmueble> items = null;
@@ -156,5 +171,72 @@ public class InmuebleController implements Serializable {
         }
 
     }
+    public void actualizarFoto() throws IOException {
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
 
+        try {
+            if (this.foto.getSize() > 2097152 && selected != null) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: El archivo no puede ser más de 2mb", ""));
+                return;
+            }
+            
+            else if (this.foto.getSize() <= 0 && selected != null) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Ud. debe seleccionar un archivo de imagen \".jpg\"", ""));
+                return;
+            }           
+
+            else if (!this.foto.getFileName().endsWith(".jpg")&& selected != null) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: El archivo debe ser con extensión \".jpg\"", ""));
+                return;
+            }
+                       
+            else if (selected != null) {
+                ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+                String carpetaAvatar = (String) servletContext.getRealPath("/imagenes");
+
+                outputStream = new FileOutputStream(new File(carpetaAvatar + "/" + getFoto().getFileName()));
+
+                inputStream = this.foto.getInputstream();
+
+                int read = 0;
+                byte[] bytes = new byte[1024];
+
+                while ((read = inputStream.read(bytes)) != -1) {
+                    outputStream.write(bytes, 0, read);
+                }
+
+                selected.setImg(getFoto().getFileName());
+                persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("InmuebleUpdated"));
+                selected = null;
+                //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto:", "Avatar actualizado correctamente"));
+            }
+            else
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: debe seleccionar un Inmueble",""));
+           
+            
+        } catch (Exception ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador " + ex.getMessage()));
+        } finally {
+            if ( selected != null) {
+                 selected = null;
+            }
+            
+            if (inputStream != null) {
+                inputStream.close();
+            }
+
+            if (outputStream != null) {
+                outputStream.close();
+            }
+        }
+    }
+
+    public UploadedFile getFoto() {
+        return foto;
+    }
+
+    public void setFoto(UploadedFile foto) {
+        this.foto = foto;
+    }
 }

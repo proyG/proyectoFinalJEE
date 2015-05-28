@@ -14,7 +14,7 @@
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="InmuebleListForm">
+            <h:form id="InmuebleListForm" enctype="multipart/form-data" >
                 <p:panel header="#{bundle.ListInmuebleTitle}">
                     <p:dataTable id="datalist" value="#{inmuebleController.items}" var="item"
                                  selectionMode="single" selection="#{inmuebleController.selected}"
@@ -26,7 +26,12 @@
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-
+                         <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListInmuebleTitle_idInmueble}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idInmueble}"/>
+                        </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListInmuebleTitle_barrio}"/>
@@ -66,15 +71,12 @@
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListInmuebleTitle_img}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.img}"/>
+                            </f:facet>                            
+                            <p:graphicImage value="#{FacesContext.getCurrentInstance().getExternalContext()}/imagenes/#{item.img}" width="70" height="70" cache="false" alt="Sin definir" style="border-radius: 4px;box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7)"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListInmuebleTitle_idInmueble}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idInmueble}"/>
-                        </p:column>
+                        <p:column headerText="">
+                            <p:commandButton value="Actualizar Foto" onclick="PF('dialogoActualizarFoto').show()"/>
+                        </p:column>                       
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{inmuebleController.prepareCreate}" update=":InmuebleCreateForm" oncomplete="PF('InmuebleCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":InmuebleViewForm" oncomplete="PF('InmuebleViewDialog').show()" disabled="#{empty inmuebleController.selected}"/>
@@ -82,9 +84,16 @@
                             <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{inmuebleController.destroy}" update=":growl,datalist" disabled="#{empty inmuebleController.selected}"/>
                         </f:facet>
                     </p:dataTable>
-                </p:panel>
-            </h:form>
-
+                </p:panel>                
+            </h:form>   
+            
+            <p:dialog header="Actualizar Foto" widgetVar="dialogoActualizarFoto">
+                    <h:form id="frmActualizarAvatar" enctype="multipart/form-data">                           
+                        <p:fileUpload mode="simple" value="#{inmuebleController.foto}"/>
+                        <p:commandButton value="Actualizar Foto" ajax="false" actionListener="#{inmuebleController.actualizarFoto()}"/>                        
+                    </h:form>
+            </p:dialog>
+            
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>
