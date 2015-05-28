@@ -216,7 +216,7 @@ public class InmuebleController implements Serializable {
            
             
         } catch (Exception ex) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:", "Por favor contacte con su administrador " + ex.getMessage()));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:" + ex.getMessage(),"Por favor contacte con su administrador " ));
         } finally {
             if ( selected != null) {
                  selected = null;
