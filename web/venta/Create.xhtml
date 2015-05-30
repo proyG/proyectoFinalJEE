@@ -11,10 +11,13 @@
         <p:dialog id="VentaCreateDialog" widgetVar="VentaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Ventas/Arriendo">
             <h:form id="VentaCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{transaccionController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateTransaccionLabel_tipo}" for="tipo" />
-                        <p:inputText id="tipo" value="#{transaccionController.selected.tipo}" title="#{bundle.CreateTransaccionTitle_tipo}" required="true" label="Se necesita tipo de transaccion"/>
+                    <p:panelGrid columns="2" rendered="#{transaccionController.selected != null}">                                               
                         
+                        <p:outputLabel for="tipo" value="#{bundle.CreateTransaccionLabel_tipo}" />
+                        <p:selectOneRadio id="tipo" value="#{transaccionController.selected.tipo}" required="true">
+                            <f:selectItem itemLabel="Venta" itemValue="Venta" />
+                            <f:selectItem itemLabel="Arriendo" itemValue="Arriendo" />                            
+                        </p:selectOneRadio>                        
                         
                         <p:outputLabel value="#{bundle.CreateTransaccionLabel_cliente}" for="cliente" />                        
                         <p:selectOneMenu id="cliente" value="#{transaccionController.selected.cliente}" >

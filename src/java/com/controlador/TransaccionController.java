@@ -90,11 +90,10 @@ public class TransaccionController implements Serializable {
                 selectedInmueble = null;
             }
         }
-
-        /*persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("TransaccionCreated"));
+        
          if (!JsfUtil.isValidationFailed()) {
          items = null;    // Invalidate list of items to trigger re-query.
-         }*/
+         }
     }
 
     public void update() {
@@ -203,10 +202,8 @@ public class TransaccionController implements Serializable {
         this.inmuebleControlador = inmuebleControlador;
     }
 
-    public List<Inmueble> getItemsInmuebles() {
-        if (itemsInmueble == null) {            
-            itemsInmueble = inmuebleControlador.getItems();
-        }
+    public List<Inmueble> getItemsInmuebles() {        
+        itemsInmueble = inmuebleControlador.getItems();        
         return itemsInmueble;
     }    
     
