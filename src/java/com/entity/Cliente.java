@@ -136,7 +136,7 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-        return "[ CC:" + cedula + "] " + "[ Nombre:" + nombre + "] "+ " " + "[ Apellidos:" + apellidos + " ]";
+        return "CC:" + cedula + "--" + " Nombres: " + nombre + " " + apellidos;
     }
     
 }

@@ -109,7 +109,7 @@ public class Transaccion implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entity.Transaccion[ idTransaccion=" + idTransaccion + " ]";
+        return "id: " + idTransaccion + " tipo: "+ tipo + " cliente: "+ cliente + " Inmueble: "+ inmueble ;
     }
     
 }

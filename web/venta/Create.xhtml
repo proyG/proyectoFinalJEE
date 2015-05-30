@@ -8,30 +8,23 @@
 
     <ui:composition>
 
-        <p:dialog id="InmuebleCreateDlg" widgetVar="VentaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateInmuebleTitle}">
+        <p:dialog id="VentaCreateDialog" widgetVar="VentaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Ventas/Arriendo">
             <h:form id="VentaCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{inmuebleController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateInmuebleLabel_barrio}" for="barrio" />
-                        <p:inputText id="barrio" value="#{inmuebleController.selected.barrio}" title="#{bundle.CreateInmuebleTitle_barrio}" />
-                        <p:outputLabel value="#{bundle.CreateInmuebleLabel_direccion}" for="direccion" />
-                        <p:inputText id="direccion" value="#{inmuebleController.selected.direccion}" title="#{bundle.CreateInmuebleTitle_direccion}" required="true" requiredMessage="#{bundle.CreateInmuebleRequiredMessage_direccion}"/>
-                        <p:outputLabel value="#{bundle.CreateInmuebleLabel_telefono}" for="telefono" />
-                        <p:inputText id="telefono" value="#{inmuebleController.selected.telefono}" title="#{bundle.CreateInmuebleTitle_telefono}" />
-                        <p:outputLabel value="#{bundle.CreateInmuebleLabel_tipo}" for="tipo" />
-                        <p:inputText id="tipo" value="#{inmuebleController.selected.tipo}" title="#{bundle.CreateInmuebleTitle_tipo}" />
-                        <p:outputLabel value="#{bundle.CreateInmuebleLabel_tamaÃo}" for="tamaÃo" />
-                        <p:inputText id="tamaÃo" value="#{inmuebleController.selected.tamaÃo}" title="#{bundle.CreateInmuebleTitle_tamaÃo}" />
-                        <p:outputLabel value="#{bundle.CreateInmuebleLabel_precio}" for="precio" />
-                        <p:inputText id="precio" value="#{inmuebleController.selected.precio}" title="#{bundle.CreateInmuebleTitle_precio}" />
-                        
-                        <p:outputLabel value="#{bundle.CreateInmuebleLabel_img}" for="img" />
-                        <p:inputText id="img" value="#{inmuebleController.selected.img}" title="#{bundle.CreateInmuebleTitle_img}" />
+                    <p:panelGrid columns="2" rendered="#{transaccionController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateTransaccionLabel_tipo}" for="tipo" />
+                        <p:inputText id="tipo" value="#{transaccionController.selected.tipo}" title="#{bundle.CreateTransaccionTitle_tipo}" required="true" label="Se necesita tipo de transaccion"/>
                         
                         
+                        <p:outputLabel value="#{bundle.CreateTransaccionLabel_cliente}" for="cliente" />                        
+                        <p:selectOneMenu id="cliente" value="#{transaccionController.selected.cliente}" >
+                            <f:selectItems value="#{clienteController.itemsAvailableSelectOne}"
+                                           var="clienteItem"
+                                           itemValue="#{clienteItem}"/>
+                        </p:selectOneMenu>
                         
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{inmuebleController.create}" value="#{bundle.Save}" update="display,:VentaListForm:datalist,:growl" oncomplete="handleSubmit(args,'VentaCreateDialog');"/>
+                    <p:commandButton actionListener="#{transaccionController.create}" value="#{bundle.Save}" update="display,:VentaListForm:datalist,:growl" oncomplete="handleSubmit(args,'VentaCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="VentaCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

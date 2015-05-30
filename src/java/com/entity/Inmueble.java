@@ -179,7 +179,7 @@ public class Inmueble implements Serializable {
 
     @Override
     public String toString() {
-        return "com.entity.Inmueble[ idInmueble=" + idInmueble + " ]";
+        return "IdInmueble:[" + idInmueble + "]-- Direccion: "+ direccion +" Barrio: "+ barrio;
     }
     
 }

@@ -27,7 +27,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import javax.servlet.http.HttpSession;
+import javax.faces.bean.ManagedProperty;
 import org.primefaces.model.UploadedFile;
 
 @ManagedBean(name = "inmuebleController")
@@ -59,7 +59,7 @@ public class InmuebleController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private InmuebleFacade getFacade() {
+    public InmuebleFacade getFacade() {
         return ejbFacade;
     }
 
@@ -238,5 +238,5 @@ public class InmuebleController implements Serializable {
 
     public void setFoto(UploadedFile foto) {
         this.foto = foto;
-    }
+    }    
 }

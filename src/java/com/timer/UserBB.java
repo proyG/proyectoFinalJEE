@@ -5,7 +5,6 @@
  */
 package com.timer;
 
-import com.controlador.UsuarioController;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -20,8 +19,6 @@ public class UserBB {
 
     public String logout(){
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/index.xhtml?faces-redirect=true";
-        
-        
+        return "/index.xhtml?faces-redirect=true";        
     }
 }

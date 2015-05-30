@@ -3,6 +3,7 @@ package com.controlador;
 import com.entity.Transaccion;
 import com.controlador.util.JsfUtil;
 import com.controlador.util.JsfUtil.PersistAction;
+import com.entity.Inmueble;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,16 +12,24 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.EJBException;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean(name = "transaccionController")
 @SessionScoped
 public class TransaccionController implements Serializable {
+       
+    @ManagedProperty("#{inmuebleController}")
+    private InmuebleController inmuebleControlador;
+    private List<Inmueble> itemsInmueble = null;
+    private Inmueble selectedInmueble;
 
     @EJB
     private com.controlador.TransaccionFacade ejbFacade;
@@ -28,6 +37,14 @@ public class TransaccionController implements Serializable {
     private Transaccion selected;
 
     public TransaccionController() {
+    }
+
+    public Inmueble getSelectedInmueble() {
+        return selectedInmueble;
+    }
+
+    public void setSelectedInmueble(Inmueble selectedInmueble) {
+        this.selectedInmueble = selectedInmueble;
     }
 
     public Transaccion getSelected() {
@@ -53,12 +70,31 @@ public class TransaccionController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
-
+    
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("TransaccionCreated"));
-        if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
+        try {
+
+            if (selectedInmueble != null) {
+                                
+                selected.setInmueble(selectedInmueble);
+                persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("TransaccionCreated"));                                
+
+            } else {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: debe seleccionar un Inmueble", ""));
+            }
+
+        } catch (Exception ex) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:" + ex.getMessage(), "Por favor contacte con su administrador "));
+        } finally {
+            if (selectedInmueble != null) {
+                selectedInmueble = null;
+            }
         }
+
+        /*persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("TransaccionCreated"));
+         if (!JsfUtil.isValidationFailed()) {
+         items = null;    // Invalidate list of items to trigger re-query.
+         }*/
     }
 
     public void update() {
@@ -72,7 +108,8 @@ public class TransaccionController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-
+    
+    //items de las transacciones 
     public List<Transaccion> getItems() {
         if (items == null) {
             items = getFacade().findAll();
@@ -157,4 +194,27 @@ public class TransaccionController implements Serializable {
 
     }
 
+    //GET creado para acceder a las inmuebles de la managed bean
+    public InmuebleController getInmuebleControlador() {
+        return inmuebleControlador;
+    }
+    //SET creado para acceder a las inmuebles de la managed bean
+    public void setInmuebleControlador(InmuebleController inmuebleControlador) {
+        this.inmuebleControlador = inmuebleControlador;
+    }
+
+    public List<Inmueble> getItemsInmuebles() {
+        if (itemsInmueble == null) {            
+            itemsInmueble = inmuebleControlador.getItems();
+        }
+        return itemsInmueble;
+    }    
+    
+    public List<Inmueble> getItemsAvailableSelectManyInmuebles() {
+        return inmuebleControlador.getFacade().findAll();
+    }
+
+    public List<Inmueble> getItemsAvailableSelectOneInmuebles() {
+        return inmuebleControlador.getFacade().findAll();
+    }
 }

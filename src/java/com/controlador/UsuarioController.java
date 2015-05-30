@@ -251,14 +251,8 @@ public class UsuarioController implements Serializable {
         contrasenia = Encrypt.sha512(contrasenia);
         
         List<Usuario> miLista = getFacade().findAll();
-        //Boolean encontrado = false;
-        Boolean encontrado = busquedaUsuario(3);
         
-        /*for (int i = 0; i < miLista.size() && !encontrado; i++) {
-            if (contrasenia.equals(miLista.get(i).getPassword()) && selected.getUsername().equals(miLista.get(i).getUsername())) {
-                encontrado = true;
-            }
-        }*/
+        Boolean encontrado = busquedaUsuario(3);
         
         if (encontrado == true) {
             contrasenia = selected.getPassword();
@@ -285,9 +279,7 @@ public class UsuarioController implements Serializable {
             }
 
             if (minus == true && mayus == true && num == true && especial == true) {
-
-                //selected = new Usuario();
-                //selected.setUsername(usuario);
+                
                 selected.setPassword(Encrypt.sha512(contrasenia));
 
                 persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("UsuarioUpdated"));
@@ -391,7 +383,5 @@ public class UsuarioController implements Serializable {
                 return null;
             }
         }
-
     }
-
 }
