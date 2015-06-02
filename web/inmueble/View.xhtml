@@ -12,6 +12,8 @@
             <h:form id="InmuebleViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{inmuebleController.selected != null}">
+                        <h:outputText value="#{bundle.ViewInmuebleLabel_idInmueble}"/>
+                        <h:outputText value="#{inmuebleController.selected.idInmueble}" title="#{bundle.ViewInmuebleTitle_idInmueble}"/>
                         <h:outputText value="#{bundle.ViewInmuebleLabel_barrio}"/>
                         <h:outputText value="#{inmuebleController.selected.barrio}" title="#{bundle.ViewInmuebleTitle_barrio}"/>
                         <h:outputText value="#{bundle.ViewInmuebleLabel_direccion}"/>
@@ -25,9 +27,7 @@
                         <h:outputText value="#{bundle.ViewInmuebleLabel_precio}"/>
                         <h:outputText value="#{inmuebleController.selected.precio}" title="#{bundle.ViewInmuebleTitle_precio}"/>
                         <h:outputText value="#{bundle.ViewInmuebleLabel_img}"/>
-                        <h:outputText value="#{inmuebleController.selected.img}" title="#{bundle.ViewInmuebleTitle_img}"/>
-                        <h:outputText value="#{bundle.ViewInmuebleLabel_idInmueble}"/>
-                        <h:outputText value="#{inmuebleController.selected.idInmueble}" title="#{bundle.ViewInmuebleTitle_idInmueble}"/>
+                        <h:outputText value="#{inmuebleController.selected.img}" title="#{bundle.ViewInmuebleTitle_img}"/>                        
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="InmuebleViewDialog.hide()"/>
                 </h:panelGroup>

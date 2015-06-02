@@ -8,20 +8,36 @@
 
     <ui:composition>
 
-        <p:dialog id="ClienteCreateDlg" widgetVar="ClienteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateClienteTitle}">
+        <p:dialog id="ClienteCreateDlg" widgetVar="ClienteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateClienteTitle}" closable="false">
             <h:form id="ClienteCreateForm">
-                <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{clienteController.selected != null}">
+                <h:panelGroup id="display" >
+                    <p:panelGrid columns="2" rendered="#{clienteController.selected != null}" >
                         <p:outputLabel value="#{bundle.CreateClienteLabel_cedula}" for="cedula" />
-                        <p:inputText id="cedula" value="#{clienteController.selected.cedula}" title="#{bundle.CreateClienteTitle_cedula}" required="true" requiredMessage="#{bundle.CreateClienteRequiredMessage_cedula}"/>
+                        <p:inputText id="cedula" value="#{clienteController.selected.cedula}" title="#{bundle.CreateClienteTitle_cedula}" required="true" requiredMessage="#{bundle.CreateClienteRequiredMessage_cedula}"
+                                     validatorMessage="Campo Cedula, solo se admiten numeros">
+                            <f:validateRegex pattern="^[0-9]+$" />
+                        </p:inputText>                                                  
                         <p:outputLabel value="#{bundle.CreateClienteLabel_nombre}" for="nombre" />
-                        <p:inputText id="nombre" value="#{clienteController.selected.nombre}" title="#{bundle.CreateClienteTitle_nombre}" />
+                        <p:inputText id="nombre" value="#{clienteController.selected.nombre}" title="#{bundle.CreateClienteTitle_nombre}" 
+                                     validatorMessage="Campo nombres, solo se admiten letras">
+                            <f:validateRegex pattern="^[a-zA-Z]+$" />
+                        </p:inputText>   
+
                         <p:outputLabel value="#{bundle.CreateClienteLabel_apellidos}" for="apellidos" />
-                        <p:inputText id="apellidos" value="#{clienteController.selected.apellidos}" title="#{bundle.CreateClienteTitle_apellidos}" />
+                        <p:inputText id="apellidos" value="#{clienteController.selected.apellidos}" title="#{bundle.CreateClienteTitle_apellidos}"
+                                     validatorMessage="Campo apellidos, solo se admiten letras">
+                            <f:validateRegex pattern="^[a-zA-Z]+$" />
+                        </p:inputText>   
                         <p:outputLabel value="#{bundle.CreateClienteLabel_email}" for="email" />
-                        <p:inputText id="email" value="#{clienteController.selected.email}" title="#{bundle.CreateClienteTitle_email}" />
+                        <p:inputText id="email" value="#{clienteController.selected.email}" title="#{bundle.CreateClienteTitle_email}" 
+                                     validatorMessage="Debe seguir la estructura email@micorreo.com">
+                            <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                        </p:inputText>
                         <p:outputLabel value="#{bundle.CreateClienteLabel_telefono}" for="telefono" />
-                        <p:inputText id="telefono" value="#{clienteController.selected.telefono}" title="#{bundle.CreateClienteTitle_telefono}" />
+                        <p:inputText id="telefono" value="#{clienteController.selected.telefono}" title="#{bundle.CreateClienteTitle_telefono}" 
+                                     validatorMessage="Campo Telefono, solo se admiten numeros">
+                            <f:validateRegex pattern="^[0-9]+$" />
+                        </p:inputText>   
                     </p:panelGrid>
                     <p:commandButton actionListener="#{clienteController.create}" value="#{bundle.Save}" update="display,:ClienteListForm:datalist,:growl" oncomplete="handleSubmit(args,'ClienteCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="ClienteCreateDialog.hide()"/>

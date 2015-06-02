@@ -13,7 +13,7 @@
 
     <h:body>
 
-        <p:growl id="growl" life="300000" />
+        <p:growl id="growl" life="5000" />
 
         <p:layout fullPage="true">
             <p:layoutUnit position="north" size="65" header="#{bundle.AppName}">
@@ -26,6 +26,11 @@
                             <p:menuitem value="Transaccion" outcome="/transaccion/List.xhtml" />
                             <p:menuitem value="Usuario" outcome="/usuario/List.xhtml" />
                             <p:menuitem value="Venta/Arriendo" outcome="/venta/List.xhtml" />
+                        </p:submenu>
+                        <p:submenu label="Reportes" >
+                            <p:menuitem value="Transacciones" outcome="/reportes/transacciones/reporteTransaccion.jsp"/>                            
+                            <p:menuitem value="Clientes" outcome="/reportes/clientes/reporteCliente.jsp"/>                            
+                            <p:menuitem value="Inmuebles" outcome="/reportes/inmuebles/reporteInmueble.jsp"/> 
                         </p:submenu>
                     </p:menubar>
                 </h:form>

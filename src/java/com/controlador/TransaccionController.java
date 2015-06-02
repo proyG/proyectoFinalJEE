@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 @ManagedBean(name = "transaccionController")
 @SessionScoped
 public class TransaccionController implements Serializable {
-       
+
     @ManagedProperty("#{inmuebleController}")
     private InmuebleController inmuebleControlador;
     private List<Inmueble> itemsInmueble = null;
@@ -70,14 +70,14 @@ public class TransaccionController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
-    
+
     public void create() {
         try {
 
             if (selectedInmueble != null) {
-                                
+
                 selected.setInmueble(selectedInmueble);
-                persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("TransaccionCreated"));                                
+                persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("TransaccionCreated"));
 
             } else {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: debe seleccionar un Inmueble", ""));
@@ -90,10 +90,10 @@ public class TransaccionController implements Serializable {
                 selectedInmueble = null;
             }
         }
-        
-         if (!JsfUtil.isValidationFailed()) {
-         items = null;    // Invalidate list of items to trigger re-query.
-         }
+
+        if (!JsfUtil.isValidationFailed()) {
+            items = null;    // Invalidate list of items to trigger re-query.
+        }
     }
 
     public void update() {
@@ -107,7 +107,7 @@ public class TransaccionController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
-    
+
     //items de las transacciones 
     public List<Transaccion> getItems() {
         if (items == null) {
@@ -197,16 +197,17 @@ public class TransaccionController implements Serializable {
     public InmuebleController getInmuebleControlador() {
         return inmuebleControlador;
     }
+
     //SET creado para acceder a las inmuebles de la managed bean
     public void setInmuebleControlador(InmuebleController inmuebleControlador) {
         this.inmuebleControlador = inmuebleControlador;
     }
 
-    public List<Inmueble> getItemsInmuebles() {        
-        itemsInmueble = inmuebleControlador.getItems();        
+    public List<Inmueble> getItemsInmuebles() {
+        itemsInmueble = inmuebleControlador.getItems();
         return itemsInmueble;
-    }    
-    
+    }
+
     public List<Inmueble> getItemsAvailableSelectManyInmuebles() {
         return inmuebleControlador.getFacade().findAll();
     }

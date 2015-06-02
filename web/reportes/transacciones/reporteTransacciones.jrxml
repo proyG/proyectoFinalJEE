@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0" uuid="39ebb5b5-3ff4-4da5-965a-1eb8789fd302">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="338"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#FFFFFF" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     transaccion."id_transaccion" AS transaccion_id_transaccion,
+     inmueble."barrio" AS inmueble_barrio,
+     inmueble."direccion" AS inmueble_direccion,
+     inmueble."tipo" AS inmueble_tipo,
+     inmueble."id_inmueble" AS inmueble_id_inmueble,
+     cliente."cedula" AS cliente_cedula,
+     cliente."nombre" AS cliente_nombre,
+     cliente."apellidos" AS cliente_apellidos,
+     transaccion."tipo" AS transaccion_tipo
+FROM
+     "public"."inmueble" inmueble INNER JOIN "public"."transaccion" transaccion ON inmueble."id_inmueble" = transaccion."inmueble"
+     INNER JOIN "public"."cliente" cliente ON transaccion."cliente" = cliente."cedula"]]>
+	</queryString>
+	<field name="transaccion_id_transaccion" class="java.math.BigDecimal"/>
+	<field name="transaccion_tipo" class="java.lang.String"/>
+	<field name="inmueble_id_inmueble" class="java.math.BigDecimal"/>
+	<field name="inmueble_tipo" class="java.lang.String"/>
+	<field name="inmueble_direccion" class="java.lang.String"/>
+	<field name="inmueble_barrio" class="java.lang.String"/>
+	<field name="cliente_cedula" class="java.lang.String"/>
+	<field name="cliente_nombre" class="java.lang.String"/>
+	<field name="cliente_apellidos" class="java.lang.String"/>
+	<group name="inmueble_id_inmueble">
+		<groupExpression><![CDATA[$F{inmueble_id_inmueble}]]></groupExpression>
+		<groupHeader>
+			<band height="40">
+				<textField>
+					<reportElement style="SubTitle" x="195" y="13" width="587" height="24" forecolor="#000000" uuid="20943a11-3d3c-47c2-aefe-86f84c15a429"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{inmueble_id_inmueble}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="97" y="13" width="88" height="24" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="7d877713-6bdc-4d7d-b4c7-37befe05e26a"/>
+				</rectangle>
+				<staticText>
+					<reportElement style="Column header" x="111" y="13" width="74" height="14" uuid="a0820e91-1dc0-4a92-bdad-86c88e8c35cc"/>
+					<text><![CDATA[ID inmueble]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="30">
+				<frame>
+					<reportElement mode="Opaque" x="652" y="0" width="150" height="30" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="c73256e6-608e-4f77-8f33-6f4b07294775"/>
+				</frame>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band height="575" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="475" width="105" height="100" backcolor="#666666" uuid="e6267062-6d51-469e-8c6c-92708160cc57"/>
+				<textField>
+					<reportElement style="Column header" x="0" y="0" width="104" height="73" forecolor="#000000" uuid="6a22592c-ce7b-4be3-b784-f0bafc236bc6"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="58" isBold="true" pdfFontName="Helvetica-Bold"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="0" y="77" width="104" height="20" forecolor="#000000" uuid="df2478f5-947c-4203-952e-3e57957fa74c"/>
+					<box leftPadding="4" rightPadding="4"/>
+					<textElement textAlignment="Center">
+						<font size="16" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement mode="Transparent" x="42" y="73" width="20" height="1" backcolor="#FFFFFF" uuid="63e4f5e0-36c1-436b-9331-18e010c68d48"/>
+				</line>
+			</frame>
+			<image>
+				<reportElement x="-20" y="381" width="104" height="94" uuid="c3335ccb-a45c-4920-bbb7-a484b4b393d0"/>
+				<imageExpression><![CDATA["C:\\Users\\Erik\\Documents\\GitHub\\proyectoFinalJEE\\web\\reportes\\transacciones\\transaccion.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="104" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="0" width="802" height="67" uuid="4bec3ae7-a529-4df1-9c61-d444414bb6bb"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="54" isBold="false" pdfFontName="Helvetica"/>
+				</textElement>
+				<text><![CDATA[Reporte]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="232" y="67" width="568" height="37" uuid="88a35e14-7c41-469c-ab14-f2cba6b7475d"/>
+				<textElement textAlignment="Right">
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[Listado de Transacciones]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="97" y="5" width="705" height="20" backcolor="#666666" uuid="1702e883-75c4-4841-8140-cd72d769fe03"/>
+				<staticText>
+					<reportElement style="Column header" x="0" y="0" width="88" height="15" uuid="779ac65d-d9fb-40c1-b4ab-ef06e8575c9f"/>
+					<text><![CDATA[ID transaccion]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="88" y="0" width="61" height="15" uuid="ba372d1a-1efa-4966-bf9c-cbcf3f895d08"/>
+					<text><![CDATA[Tipo transaccion]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="161" y="0" width="103" height="15" uuid="40ec79d0-fa5e-44de-93a3-8ff932351865"/>
+					<text><![CDATA[Tipo inmueble]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="264" y="0" width="88" height="15" uuid="ee852ae1-8f48-461b-9761-336e38a7d611"/>
+					<text><![CDATA[Direccion]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="352" y="0" width="88" height="15" uuid="f8a5d356-bade-4643-be98-fbb0f41c25c3"/>
+					<text><![CDATA[Barrio]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="440" y="0" width="88" height="15" uuid="fd471b26-23a2-44f1-b1b9-d80658e2a2c4"/>
+					<text><![CDATA[Cedula Cliente]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="528" y="0" width="88" height="15" uuid="9683be81-69af-4590-ae16-cd3fd7cbd4c6"/>
+					<textElement textAlignment="Center" verticalAlignment="Top"/>
+					<text><![CDATA[Nombre]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="616" y="0" width="88" height="15" uuid="c0922d8f-d693-42b7-9c27-8ce26395f8aa"/>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[Apellidos]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<frame>
+				<reportElement x="97" y="1" width="705" height="15" uuid="d82fca47-bc06-4614-8cfb-d4a7465a9fd7"/>
+				<textField>
+					<reportElement style="Detail" x="0" y="0" width="88" height="15" uuid="dd5d4c70-0c76-4dd6-aca7-7e3a242635c1"/>
+					<textFieldExpression><![CDATA[$F{transaccion_id_transaccion}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="88" y="0" width="88" height="15" uuid="682e47b6-2dbb-4e53-98a2-74d04b57bdf5"/>
+					<textFieldExpression><![CDATA[$F{transaccion_tipo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="176" y="0" width="88" height="15" uuid="c6275999-fb46-4721-9b9d-a128e6c64b36"/>
+					<textFieldExpression><![CDATA[$F{inmueble_tipo}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="264" y="0" width="88" height="15" uuid="d3c9ea2e-3155-4d1e-a816-8d543ce80498"/>
+					<textFieldExpression><![CDATA[$F{inmueble_direccion}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="352" y="0" width="88" height="15" uuid="92e7f465-fb73-47bf-8e90-f9ec6360ab6b"/>
+					<textFieldExpression><![CDATA[$F{inmueble_barrio}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="440" y="0" width="88" height="15" uuid="293bd01e-407b-494f-b00c-49c725f3a941"/>
+					<textFieldExpression><![CDATA[$F{cliente_cedula}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="555" y="0" width="61" height="15" uuid="4b03d70e-4f05-40d2-8037-fcb978ce99ef"/>
+					<textFieldExpression><![CDATA[$F{cliente_nombre}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Detail" x="644" y="0" width="60" height="15" uuid="3810782b-7885-4234-a5b9-3316b9e45d95"/>
+					<textFieldExpression><![CDATA[$F{cliente_apellidos}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="97" y="16" width="705" height="1" uuid="0916eee3-4e64-48a9-8453-1e58c7a37dbe"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="39" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="671" y="0" width="131" height="20" forecolor="#000000" uuid="095d3f36-2ddc-49ea-9e2b-5e47043ee42e"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="96" y="0" width="76" height="20" uuid="17e07c34-3fd5-44b4-8875-90d1cd7cfd76"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Inmobiliaria]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
