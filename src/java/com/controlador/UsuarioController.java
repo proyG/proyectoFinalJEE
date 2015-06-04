@@ -83,7 +83,7 @@ public class UsuarioController implements Serializable {
                 cont = 0;
                 banCont = false;
                 JsfUtil.addSuccessMessage("Bienvienido: " + usuario);
-                pag = "usuario/List";
+                pag = "principal";
             } else {
                 JsfUtil.addErrorMessage("Nombre de usuario o Contraseña incorrectos");
                 pag = "index";

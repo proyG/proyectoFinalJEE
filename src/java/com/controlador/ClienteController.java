@@ -53,16 +53,36 @@ public class ClienteController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
-
-    public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ClienteCreated"));
-        if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
-        }
+    
+    public Cliente buscarCliente(String pCed){        
+        Boolean encontrado=false;
+        Cliente miCliente=null;
+        for(int i=0; i<items.size() && !encontrado; i++){
+            if(items.get(i).getCedula().equals(pCed)){
+                encontrado = true;
+                miCliente = items.get(i);
+            }
+        }        
+        return miCliente;
     }
 
-    public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ClienteUpdated"));
+    public void create() {
+        
+        String cedula = selected.getCedula();
+        Cliente miCliente = buscarCliente(cedula);
+        
+        if(miCliente==null){
+            persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ClienteCreated"));
+            if (!JsfUtil.isValidationFailed()) {
+                items = null;    // Invalidate list of items to trigger re-query.
+            }            
+        }
+        else JsfUtil.addErrorMessage("Error: el Cliente con esta cedula ya se encuentra registrado");
+        
+    }
+
+    public void update() {                       
+            persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ClienteUpdated"));                                                   
     }
 
     public void destroy() {

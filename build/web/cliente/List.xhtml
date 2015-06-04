@@ -15,7 +15,12 @@
 
         <ui:define name="body">
             <h:form id="ClienteListForm">
-                <p:panel header="#{bundle.ListClienteTitle}">
+                <p:panel>
+                    <div align="center">
+                        <i class="fa fa-male fa-5x"  ></i>
+                        <h1> Lista Clientes </h1>
+                    </div>                    
+                    
                     <p:dataTable id="datalist" value="#{clienteController.items}" var="item"
                                  selectionMode="single" selection="#{clienteController.selected}"
                                  paginator="true"
@@ -27,7 +32,7 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+                        <p:column filterBy="#{item.cedula}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListClienteTitle_cedula}"/>
                             </f:facet>
@@ -39,7 +44,7 @@
                             </f:facet>
                             <h:outputText value="#{item.nombre}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.apellidos}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListClienteTitle_apellidos}"/>
                             </f:facet>

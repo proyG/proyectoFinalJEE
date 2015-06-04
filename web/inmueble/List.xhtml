@@ -15,18 +15,22 @@
 
         <ui:define name="body">
             <h:form id="InmuebleListForm" enctype="multipart/form-data" >
-                <p:panel header="#{bundle.ListInmuebleTitle}">
+                <p:panel >
+                    <div align="center">
+                        <i class="fa fa-building-o fa-5x"  ></i>
+                        <h1> Lista Inmuebles </h1>
+                    </div>       
                     <p:dataTable id="datalist" value="#{inmuebleController.items}" var="item"
                                  selectionMode="single" selection="#{inmuebleController.selected}"
                                  paginator="true"
                                  rowKey="#{item.idInmueble}"
-                                 rows="10"
+                                 rows="2"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-                         <p:column>
+                        <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListInmuebleTitle_idInmueble}"/>
                             </f:facet>
@@ -38,7 +42,7 @@
                             </f:facet>
                             <h:outputText value="#{item.barrio}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.direccion}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListInmuebleTitle_direccion}"/>
                             </f:facet>
@@ -50,7 +54,7 @@
                             </f:facet>
                             <h:outputText value="#{item.telefono}"/>
                         </p:column>
-                        <p:column>
+                        <p:column filterBy="#{item.tipo}">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListInmuebleTitle_tipo}"/>
                             </f:facet>
@@ -86,14 +90,14 @@
                     </p:dataTable>
                 </p:panel>                
             </h:form>   
-            
+
             <p:dialog header="Actualizar Foto" widgetVar="dialogoActualizarFoto">
-                    <h:form id="frmActualizarAvatar" enctype="multipart/form-data">                           
-                        <p:fileUpload mode="simple" value="#{inmuebleController.foto}"/>
-                        <p:commandButton value="Actualizar Foto" ajax="false" actionListener="#{inmuebleController.actualizarFoto()}"/>                        
-                    </h:form>
+                <h:form id="frmActualizarAvatar" enctype="multipart/form-data">                           
+                    <p:fileUpload mode="simple" value="#{inmuebleController.foto}"/>
+                    <p:commandButton value="Actualizar Foto" ajax="false" actionListener="#{inmuebleController.actualizarFoto()}"/>                        
+                </h:form>
             </p:dialog>
-            
+
             <ui:include src="Create.xhtml"/>
             <ui:include src="Edit.xhtml"/>
             <ui:include src="View.xhtml"/>

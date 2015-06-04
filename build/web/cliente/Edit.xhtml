@@ -8,14 +8,12 @@
 
     <ui:composition>
 
-        <p:dialog id="ClienteEditDlg" widgetVar="ClienteEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditClienteTitle}">
+        <p:dialog id="ClienteEditDlg" widgetVar="ClienteEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditClienteTitle}" closable="false">
             <h:form id="ClienteEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{clienteController.selected != null}">
                         <p:outputLabel value="#{bundle.EditClienteLabel_cedula}" for="cedula" />
-                        <p:inputText id="cedula" value="#{clienteController.selected.cedula}" title="#{bundle.EditClienteTitle_cedula}" required="true" requiredMessage="#{bundle.EditClienteRequiredMessage_cedula}"
-                                     validatorMessage="Campo Cedula, solo se admiten numeros">
-                            <f:validateRegex pattern="^[0-9]+$" />
+                        <p:inputText id="cedula" value="#{clienteController.selected.cedula}" title="#{bundle.EditClienteTitle_cedula}" disabled="true">
                         </p:inputText>                                        
                         <p:outputLabel value="#{bundle.EditClienteLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{clienteController.selected.nombre}" title="#{bundle.EditClienteTitle_nombre}" 

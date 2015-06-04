@@ -24,13 +24,13 @@
     <h:body>    
         <h:form id="formIndex">            
             <p:growl id="msgIndex" sticky="true"/>
-
-
-            <p:confirmDialog message="inicie sesion para acceder al sistema" header="Login" widgetVar="dlg" visible="true" closable="false" showEffect="fade" hideEffect="explode"  >
+            
+            
+            <p:confirmDialog message="Inicie  sesión para acceder al sistema" header="Login" widgetVar="dlg" visible="true" closable="false" showEffect="fade" hideEffect="explode"  >
                 <h:panelGrid columns="2" cellpadding="5">
                     <h:outputLabel for="usuario" value="Usuario" />
                     <p:inputText id="usuario" value="#{usuarioController.usuario}" required="true" label="Usuario" 
-                                 validatorMessage="Campo usuario: no se permiten caracetes especiales" autocomplete="off">
+                                 validatorMessage="Campo usuario: no se permiten caracteres especiales" autocomplete="off">
                         <f:validateRegex pattern="^[a-zA-Z[0-9]]+$" />
                     </p:inputText>
 

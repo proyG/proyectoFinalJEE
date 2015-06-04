@@ -6,6 +6,7 @@ import com.controlador.util.JsfUtil.PersistAction;
 import com.entity.Inmueble;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -29,6 +30,7 @@ public class TransaccionController implements Serializable {
     @ManagedProperty("#{inmuebleController}")
     private InmuebleController inmuebleControlador;
     private List<Inmueble> itemsInmueble = null;
+    private List<Inmueble> inmueblesDisponibles = null;
     private Inmueble selectedInmueble;
 
     @EJB
@@ -204,8 +206,31 @@ public class TransaccionController implements Serializable {
     }
 
     public List<Inmueble> getItemsInmuebles() {
-        itemsInmueble = inmuebleControlador.getItems();
+        itemsInmueble = inmuebleControlador.getItems();        
         return itemsInmueble;
+    }
+
+    public List<Inmueble> getInmueblesDisponibles() {
+        inmueblesDisponibles = new ArrayList<>();
+        itemsInmueble = inmuebleControlador.getItems();
+        items = getItems();
+        
+        for (int i = 0; i < itemsInmueble.size(); i++) {
+
+            boolean b = false;
+            for (int y = 0; y < items.size() && !b; y++) {
+                if (itemsInmueble.get(i).getIdInmueble() == items.get(y).getInmueble().getIdInmueble()) {
+                    b = true;
+                }
+            }
+            if (b == false) {
+                Inmueble pInmueble = itemsInmueble.get(i);
+                inmueblesDisponibles.add(pInmueble);
+            }
+
+        }
+
+        return inmueblesDisponibles;
     }
 
     public List<Inmueble> getItemsAvailableSelectManyInmuebles() {

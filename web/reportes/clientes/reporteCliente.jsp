@@ -34,6 +34,7 @@
    
     /*Indicamos que la respuesta va a ser en formato PDF*/
     response.setContentType("application/pdf");
+    response.setHeader("Content-Disposition","attachment; filename=\"reporteClientes.pdf\";");
     
     response.setContentLength(bytes.length);
     ServletOutputStream ouputStream = response.getOutputStream();

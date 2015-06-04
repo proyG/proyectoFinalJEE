@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="VentaCreateDialog" widgetVar="VentaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Ventas/Arriendo">
+        <p:dialog id="VentaCreateDialog" widgetVar="VentaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Ventas/Arriendo" closable="false">
             <h:form id="VentaCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{transaccionController.selected != null}">                                               

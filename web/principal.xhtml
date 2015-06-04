@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Principal</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template.xhtml">           
+
+            <ui:define name="body">
+                <p:tabView dynamic="true" cache="true">
+                    <p:tab title="Imagenes">
+                        <h:panelGrid cellpadding="10">
+                            <p:imageSwitch effect="shuffle">
+                                <ui:repeat value="#{imagesView.images}" var="image">
+                                    <p:graphicImage value="/demo/#{image}" width="1190" height="300"/>
+                                </ui:repeat>
+                            </p:imageSwitch>
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Mision">
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:graphicImage url="demo/mision.jpg" />
+                            <p align="justify" style="font-size: 13pt" > 
+                                Contribuir a nuestro país con una mayor calidad de
+                                vida a los colombianos, brindando apoyo en la toma de decisiones, 
+                                ayudando a escoger las mejores soluciones posibles en lo relacionado 
+                                a viviendas y logrando de esta manera que no haya necesidad de provocar 
+                                inestabilidad y demoras en los procesos.
+                                Consideramos que nuestra mayor fuerza es nuestra gente, la cual siempre 
+                                está dispuesta a ofrecer lo mejor de cada uno de ellos hacia los demás, 
+                                queremos dar calidez humana, la cual hoy es muy importante para nuestra 
+                                estabilidad tanto familiar como comercial, razones éstas que necesitamos 
+                                para ser cada día mejor.
+                            </p>
+
+                        </h:panelGrid>
+                    </p:tab>
+                    <p:tab title="Vision">
+                        <h:panelGrid columns="2" cellpadding="10" >
+                            <p:graphicImage url="demo/vision.jpg" />
+                            <p align="justify" style="font-size: 13pt" >
+                                Antes del 2017 debemos convertirnos en una de las Empresas Inmobiliarias 
+                                más exitosas de la ciudad, como consecuencia de un trabajo hecho con total
+                                responsabilidad, seriedad, eficiencia y compromiso con nuestros clientes, 
+                                con la sociedad y con nuestra nación, en la cual todos los que nos contacten
+                                y requieran de nuestros servicios se sientan muy bien asesorados y atendidos 
+                                por el equipo profesional que labora en INMOBILIARIA DEL SURESTE.                                                                          
+                            </p>
+                        </h:panelGrid>
+                    </p:tab>
+                </p:tabView>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

@@ -86,6 +86,10 @@ FROM
 				<reportElement x="-20" y="381" width="104" height="94" uuid="c3335ccb-a45c-4920-bbb7-a484b4b393d0"/>
 				<imageExpression><![CDATA["C:\\Users\\Erik\\Documents\\GitHub\\proyectoFinalJEE\\web\\reportes\\transacciones\\transaccion.png"]]></imageExpression>
 			</image>
+			<image>
+				<reportElement x="560" y="417" width="240" height="121" uuid="9db16467-268c-415d-af8f-b541601ce849"/>
+				<imageExpression><![CDATA["C:\\Users\\Erik\\Documents\\GitHub\\proyectoFinalJEE\\web\\demo\\logo_trasn.png"]]></imageExpression>
+			</image>
 		</band>
 	</background>
 	<title>

@@ -43,6 +43,7 @@ public class InmuebleController implements Serializable {
     private Inmueble selected;
 
     public InmuebleController() {
+       // foto = null;
     }
 
     public Inmueble getSelected() {
@@ -68,12 +69,31 @@ public class InmuebleController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
+    
+    public Inmueble buscarInmueble(String pDir){        
+        Boolean encontrado=false;
+        Inmueble miInmueble=null;
+        for(int i=0; i<items.size() && !encontrado; i++){
+            if(items.get(i).getDireccion().equals(pDir)){
+                encontrado = true;
+                miInmueble = items.get(i);
+            }
+        }        
+        return miInmueble;
+    }
 
     public void create() {
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("InmuebleCreated"));
-        if (!JsfUtil.isValidationFailed()) {
-            items = null;    // Invalidate list of items to trigger re-query.
+        String direccion = selected.getDireccion();
+        Inmueble miInmueble = buscarInmueble(direccion);
+        
+        if(miInmueble==null){
+            persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("InmuebleCreated"));
+            if (!JsfUtil.isValidationFailed()) {
+                items = null;    // Invalidate list of items to trigger re-query.
+            }
         }
+        else JsfUtil.addErrorMessage("Error: el Inmueble con esta direccion ya se encuentra registrado");
+        
     }
 
     public void update() {
@@ -192,6 +212,7 @@ public class InmuebleController implements Serializable {
             }
                        
             else if (selected != null) {
+                
                 ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
                 String carpetaAvatar = (String) servletContext.getRealPath("/imagenes");
 
@@ -209,20 +230,17 @@ public class InmuebleController implements Serializable {
                 selected.setImg(getFoto().getFileName());
                 persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("InmuebleUpdated"));
                 selected = null;
+                foto=null;
                 //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Correcto:", "Avatar actualizado correctamente"));
             }
-            else
+            else{
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: debe seleccionar un Inmueble",""));
-           
+            }
             
         } catch (Exception ex) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Error fatal:" + ex.getMessage(),"Por favor contacte con su administrador " ));
         } finally {
-            if ( selected != null) {
-                 selected = null;
-            }
-            
-            if (inputStream != null) {
+             if (inputStream != null) {
                 inputStream.close();
             }
 

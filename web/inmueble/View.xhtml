@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="InmuebleViewDlg" widgetVar="InmuebleViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewInmuebleTitle}">
+        <p:dialog id="InmuebleViewDlg" widgetVar="InmuebleViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewInmuebleTitle}" closable="false">
             <h:form id="InmuebleViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{inmuebleController.selected != null}">

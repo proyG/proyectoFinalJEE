@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="0" uuid="43295e74-e9de-47b4-bd0d-17c735344e3e">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="269"/>
+	<property name="ireport.y" value="268"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#FFFFFF" fontName="Arial" fontSize="12" isBold="true"/>
@@ -53,6 +53,10 @@ FROM
 			<image>
 				<reportElement x="-20" y="297" width="101" height="195" uuid="834b3df8-9a26-4e33-aab5-4dc579b282d4"/>
 				<imageExpression><![CDATA["C:\\Users\\Erik\\Documents\\GitHub\\proyectoFinalJEE\\web\\reportes\\inmuebles\\edificio.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="548" y="405" width="252" height="124" uuid="5cea244a-0263-4367-8436-1c8da65fdd34"/>
+				<imageExpression><![CDATA["C:\\Users\\Erik\\Documents\\GitHub\\proyectoFinalJEE\\web\\demo\\logo_trasn.png"]]></imageExpression>
 			</image>
 		</band>
 	</background>

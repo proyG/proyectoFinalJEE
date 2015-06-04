@@ -15,21 +15,24 @@
 
         <ui:define name="body">
             <h:form id="UsuarioListForm">               
-                <p:panel header="Lista de usuarios">
+                <p:panel>
+                    <div align="center">
+                        <i class="fa fa-users fa-5x"  ></i>
+                        <h1> Lista Usuarios </h1>
+                    </div>
                     <p:dataTable id="datalist" value="#{usuarioController.items}" var="item"
                                  selectionMode="single" selection="#{usuarioController.selected}"
                                  paginator="true"
                                  rowKey="#{item.username}"
                                  rows="10"
-                                 rowsPerPageTemplate="10,20,30,40,50"
-                                 >
+                                 rowsPerPageTemplate="10,20,30,40,50">
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="Usuario"/>
+                                <h:outputText value="Username"/>
                             </f:facet>
                             <h:outputText value="#{item.username}"/>
                         </p:column>                                    

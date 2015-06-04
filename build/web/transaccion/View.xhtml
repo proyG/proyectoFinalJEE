@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="TransaccionViewDlg" widgetVar="TransaccionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTransaccionTitle}">
+        <p:dialog id="TransaccionViewDlg" widgetVar="TransaccionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewTransaccionTitle}" closable="false">
             <h:form id="TransaccionViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{transaccionController.selected != null}">

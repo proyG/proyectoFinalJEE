@@ -8,14 +8,15 @@
 
     <ui:composition>
 
-        <p:dialog id="InmuebleEditDlg" widgetVar="InmuebleEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditInmuebleTitle}">
+        <p:dialog id="InmuebleEditDlg" widgetVar="InmuebleEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditInmuebleTitle}" closable="false">
             <h:form id="InmuebleEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{inmuebleController.selected != null}">
                         <p:outputLabel value="#{bundle.EditInmuebleLabel_barrio}" for="barrio" />
                         <p:inputText id="barrio" value="#{inmuebleController.selected.barrio}" title="#{bundle.EditInmuebleTitle_barrio}" />
                         <p:outputLabel value="#{bundle.EditInmuebleLabel_direccion}" for="direccion" />
-                        <p:inputText id="direccion" value="#{inmuebleController.selected.direccion}" title="#{bundle.EditInmuebleTitle_direccion}" required="true" requiredMessage="#{bundle.EditInmuebleRequiredMessage_direccion}"/>
+                        <p:inputText id="direccion" value="#{inmuebleController.selected.direccion}" title="#{bundle.EditInmuebleTitle_direccion}" disabled="true"/>
+                        
                         <p:outputLabel value="#{bundle.EditInmuebleLabel_telefono}" for="telefono" />
                         <p:inputText id="telefono" value="#{inmuebleController.selected.telefono}" title="#{bundle.EditInmuebleTitle_telefono}" 
                                      validatorMessage="Campo Telefono, solo se admiten numeros">
